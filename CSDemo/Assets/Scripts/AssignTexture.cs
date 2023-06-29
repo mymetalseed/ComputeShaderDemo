@@ -13,13 +13,17 @@ public class AssignTexture : MonoBehaviour
     private RenderTexture outputTexture;
 
     private int kernelHandle;
+
+    private int X, Y;
+
     // Start is called before the first frame update
     void Start()
     {
         outputTexture = new RenderTexture( texResolution, texResolution,0);
         outputTexture.enableRandomWrite = true;
         outputTexture.Create();
-
+        X = 1; 
+        Y = 1;
         rend = GetComponent<Renderer>();
         rend.enabled = true;
 
@@ -30,22 +34,45 @@ public class AssignTexture : MonoBehaviour
     {
         kernelHandle = shader.FindKernel("CSMain");
         shader.SetTexture(kernelHandle,"Result",outputTexture);
+        shader.SetInt("kernelCount",(int)texResolution);
         rend.material.SetTexture("_MainTex",outputTexture);
         
-        DispatchShader(texResolution/16,texResolution/16);
+        DispatchShader();
     }
 
-    private void DispatchShader(int x, int y)
+    private void DispatchShader()
     {
-        shader.Dispatch(kernelHandle,x,y,1);
+        shader.SetInt("x",(int)X);
+        shader.SetInt("y",(int)Y);
+        shader.Dispatch(kernelHandle,X,Y,1);
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.X))
         {
-            DispatchShader(texResolution / 8, texResolution / 8);
+            X++;
+            DispatchShader();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Y))
+        {
+            Y++;
+            DispatchShader();
+        }
+        
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            X--;
+            if (X <= 0) X = 1;
+            DispatchShader();
+        }
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+            Y--;
+            if (Y <= 0) Y = 1;
+            DispatchShader();
         }
     }
     
