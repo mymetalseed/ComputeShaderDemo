@@ -6,7 +6,7 @@ public class AssignTextureCircle : MonoBehaviour
 {
     public ComputeShader shader;
 
-    public int texResolution = 256;
+    public int texResolution = 1024;
 
     private Renderer rend;
 
@@ -57,7 +57,7 @@ public class AssignTextureCircle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DispatchKernels(1);
+        DispatchKernels(10);
     }
     
     
