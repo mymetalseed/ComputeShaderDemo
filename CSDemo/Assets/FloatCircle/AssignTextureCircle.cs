@@ -51,6 +51,7 @@ public class AssignTextureCircle : MonoBehaviour
     private void DispatchKernels(int count)
     {
         shader.Dispatch(clearHandle,texResolution/8,texResolution/8,1);
+        shader.SetFloat("time",Time.time);
         shader.Dispatch(circleHandle,count,1,1);
     }
     

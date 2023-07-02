@@ -329,9 +329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 7200000, guid: 96b23a6bae833034180405b0ab8c76dd, type: 3}
-  texResolution: 256
+  texResolution: 1024
   clearColor: {r: 0, g: 0, b: 0, a: 0}
-  circleColor: {r: 0, g: 0, b: 0, a: 0}
+  circleColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
