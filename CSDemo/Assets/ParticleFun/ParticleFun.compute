@@ -27,6 +27,7 @@ uint rand_xorshift()
 void respawn(uint id)
 {
     rng_state = id;
+    //max int
     float tmp = (1.0 / 4294967296.0);
     float f0 = float(rand_xorshift()) * tmp - 0.5;
     float f1 = float(rand_xorshift()) * tmp - 0.5;
